@@ -1,0 +1,1136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>NaijaWorkMen.com — Connect Skilled Workers & Clients</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+ <header class="site-header">
+   <div class="header-wrapper">
+     <!-- <h1 class="brand">NaijaWorkMen.com</h1>-->
+
+<!-- LOGO -->
+<div class="logo-section">
+
+<img src="img/logo.png" alt="NaijaWorkMen Logo" class="logo-img"> 
+<div class="logo-text"> </div>
+
+</div>
+
+     <div class="logo">NaijaWorkMen</div>
+     <!--Hamburger Icom-->
+     <div class="hamburger" id="hamburger" onClick="toggleMenu()">
+       
+       <span></span>
+       <span></span>
+       <span></span>
+     </div>
+     
+     
+     <!--NAVIGATION -->
+      <nav id="navMenu">
+      
+
+
+
+        <ul>
+        <li><a id="nav-home" href="#" data-route="home">Home</a></li>
+        <li><a id="nav-register" href="#" data-route="register-worker">Register</a></li>
+       <li> <a id="nav-jobs" href="#" data-route="jobs">Jobs</a></li>
+       <li><a id="nav-contact" href="#" data-route="contact">Contact</a></li>
+       <li><a id="nav-dashboard" href="#" data-route="dashboard">Dashboard</a></li>
+       <li><a id="nav-support" href="#" data-route="support">Support</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+<div id="globalNotify" style="
+    position: fixed;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 6px;
+    font-size: 16px;
+    z-index: 9999;
+    transition: top 0.5s ease;
+"></div>
+
+
+
+<div id="loadingOverlay" style="
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.3);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:9998;
+">
+    <div class="spinner" style="
+        width:40px; height:40px;
+        border:4px solid #fff;
+        border-top-color: transparent;
+        border-radius:50%;
+        animation: spin 0.8s linear infinite;
+    "></div>
+</div>
+
+<style>
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>
+
+
+
+
+
+
+
+
+  <main class="container" id="app">
+
+<section id="user-dashboard" class="page hidden">
+
+
+
+
+  <div class="dashboard-container">
+
+    <!-- Header / Navigation -->
+    <header class="dashboard-header">
+      <h2>Welcome, <span id="user-name">User</span></h2>
+
+
+
+      <nav class="dashboard-nav">
+        <ul>
+          <li><a href="#" data-section="profile-section">Profile</a></li>
+          <li><a href="#" data-section="jobs-section">Jobs</a></li>
+          <li><a href="#" data-section="services-section">Other Services</a></li>
+          <li><a href="#" data-section="support-section">Support</a></li>
+          <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Content Area -->
+<!-- ======== MAIN DASHBOARD GRID ======== -->
+    <div class="dashboard-grid">
+
+      <!-- ================= PROFILE (COLUMN 1) ================= -->
+      <div class="dash-column">
+        
+        <div class="dash-card">
+          <div class="profile-pic-wrapper">
+            <img src="images/placeholder-passport.jpg" id="profile-pic" alt="User Picture">
+          </div>
+
+          <h3>Profile Information</h3>
+          <p><strong>Name:</strong> <span id="profile-name">John Doe</span></p>
+          <p><strong>Email:</strong> <span id="profile-email">john@example.com</span></p>
+          <p><strong>Phone:</strong> <span id="profile-phone">+234 123 456 7890</span></p>
+
+          <button id="editProfileBtn" class="mini-btn full">Edit Profile</button>
+        </div>
+
+      </div>
+
+
+      <!-- ================= QUALIFICATIONS (COLUMN 2) ================= -->
+      <div class="dash-column">
+
+        <div class="dash-card">
+          <h3>Qualifications</h3>
+
+          <ul id="qualification-list">
+            <li>WAEC Certificate</li>
+            <li>Electrical Installation Trade Test II</li>
+            <li>Safety & Compliance Certification</li>
+            <li>NABTEB Certification</li>
+          </ul>
+        </div>
+
+      </div>
+
+
+      <!-- ================= JOB ACTIVITY + JOB ADVERTS (COLUMN 3) ================= -->
+      <div class="dash-column">
+
+        <!-- JOB ACTIVITY -->
+        <div class="dash-card">
+          <h3>Job Activity</h3>
+
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>View</th>
+              </tr>
+            </thead>
+
+            <tbody id="job-activity-body">
+              <tr>
+                <td>Electrician Work</td>
+                <td><span class="status pending">Pending</span></td>
+                <td>20 Nov 2025</td>
+                <td><button class="mini-btn">Open</button></td>
+              </tr>
+
+              <tr>
+                <td>Plumbing Repair</td>
+                <td><span class="status approved">Approved</span></td>
+                <td>18 Nov 2025</td>
+                <td><button class="mini-btn">Open</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- JOB ADVERTS / AVAILABLE JOBS -->
+        <div class="dash-card job-adverts">
+          <h3>Available Jobs</h3>
+
+          <div class="job-scroller">
+            <div class="job-ad">
+              <strong>House Painting</strong> – ₦15,000 <br>
+              Location: Life Camp, Abuja
+            </div>
+
+            <div class="job-ad">
+              <strong>AC Installation</strong> – ₦22,000 <br>
+              Location: Wuse II, Abuja
+            </div>
+
+            <div class="job-ad">
+              <strong>Tiling Work</strong> – ₦18,000 <br>
+              Location: Gwarinpa
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div> <!-- END GRID -->
+
+        </div>
+
+
+
+      </section>
+
+
+
+<section id="graduate-dashboard" class="page hidden">
+
+  <div class="dashboard-container">
+
+    <!-- Header -->
+    <header class="dashboard-header">
+      <h2>Welcome, <span id="graduate-name">Graduate</span></h2>
+
+      <nav class="dashboard-nav">
+        <ul>
+          <li><a href="#" data-section="grad-profile-section">Profile</a></li>
+          <li><a href="#" data-section="grad-qual-section">Qualifications</a></li>
+          <li><a href="#" data-section="grad-jobs-section">Jobs</a></li>
+          <li><a href="#" data-section="grad-support-section">Support</a></li>
+          <li><a href="#" id="gradLogoutBtn">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- GRID -->
+    <div class="dashboard-grid">
+
+      <!-- COLUMN 1: PROFILE -->
+      <div class="dash-column">
+
+        <div class="dash-card">
+          <div class="profile-pic-wrapper">
+            <img src="images/placeholder-passport.jpg" id="grad-profile-pic" alt="Graduate Picture">
+          </div>
+
+          <h3>Profile Information</h3>
+
+          <p><strong>Name:</strong> <span id="grad-profile-name">Loading...</span></p>
+          <p><strong>Email:</strong> <span id="grad-profile-email">Loading...</span></p>
+          <p><strong>Phone:</strong> <span id="grad-profile-phone">Not Provided</span></p>
+          <p><strong>Verification Status:</strong> 
+            <span id="grad-verification-status" class="status pending">Pending</span>
+          </p>
+
+          <button id="gradEditProfileBtn" class="mini-btn full">Edit Profile</button>
+        </div>
+
+      </div>
+
+
+      <!-- COLUMN 2: QUALIFICATIONS -->
+      <div class="dash-column">
+        <div class="dash-card">
+          <h3>Academic Information</h3>
+
+          <p><strong>Highest Qualification:</strong><br>
+            <span id="grad-highest-qualification">Loading...</span>
+          </p>
+
+          <p><strong>Field of Study:</strong><br>
+            <span id="grad-course">Loading...</span>
+          </p>
+
+          <p><strong>Institution:</strong><br>
+            <span id="grad-institution">Loading...</span>
+          </p>
+
+          <p><strong>Year Graduated:</strong><br>
+            <span id="grad-year">Loading...</span>
+          </p>
+
+          <p><strong>CV Uploaded:</strong><br>
+            <a id="grad-cv-link" href="#" target="_blank">View CV</a>
+          </p>
+        </div>
+      </div>
+
+
+      <!-- COLUMN 3: JOB OPPORTUNITIES -->
+      <div class="dash-column">
+
+        <!-- NO job activity because graduates do not have “work logs” -->
+        <div class="dash-card job-adverts">
+          <h3>Available Graduate Opportunities</h3>
+
+          <div class="job-scroller" id="graduate-job-list">
+            <div class="job-ad">
+              <strong>Graduate Internship</strong> – Abuja<br>
+              Open for applications.
+            </div>
+
+            <div class="job-ad">
+              <strong>NYSC Opportunity</strong> – Lagos<br>
+              Limited slots available.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- END GRID -->
+
+  </div>
+
+</section>
+
+
+
+<!-- ==================== ADMIN DASHBOARD ==================== -->
+<section id="admin-dashboard" class="page hidden">
+
+  <div class="dashboard-container">
+
+    <!-- HEADER -->
+    <header class="dashboard-header">
+      <h2>Welcome, <span id="admin-name">Admin</span></h2>
+
+      <nav class="dashboard-nav">
+        <ul>
+          <li><a href="#" data-section="admin-users-section">Users</a></li>
+          <li><a href="#" data-section="admin-jobs-section">Jobs</a></li>
+          <li><a href="#" data-section="admin-reports-section">Reports</a></li>
+          <li><a href="#" data-section="admin-settings-section">Settings</a></li>
+          <li><a href="#" id="adminLogoutBtn">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- GRID -->
+    <div class="dashboard-grid">
+
+      <!-- COLUMN 1: USERS MANAGEMENT -->
+      <div class="dash-column">
+        <div class="dash-card">
+          <h3>Users Management</h3>
+          <p>View, verify, or deactivate users</p>
+
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-users-list">
+              <!-- Example placeholder -->
+              <tr>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>
+                  <button class="mini-btn">Edit</button>
+                  <button class="mini-btn danger">Deactivate</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+      <!-- COLUMN 2: JOBS MANAGEMENT -->
+      <div class="dash-column">
+        <div class="dash-card">
+          <h3>Job Management</h3>
+          <p>Create, approve, or remove job listings.</p>
+
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Posted By</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-jobs-list">
+              <!-- Example placeholder -->
+              <tr>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>
+                  <button class="mini-btn">Edit</button>
+                  <button class="mini-btn danger">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+      <!-- COLUMN 3: REPORTS / STATS -->
+      <div class="dash-column">
+        <div class="dash-card">
+          <h3>Reports & Analytics</h3>
+          <p>Platform activity and statistics</p>
+
+          <ul id="admin-reports-list">
+            <li>Total Users: <span id="report-total-users">Loading...</span></li>
+            <li>Verified Users: <span id="report-verified-users">Loading...</span></li>
+            <li>Pending Verification: <span id="report-pending-users">Loading...</span></li>
+            <li>Total Jobs Posted: <span id="report-total-jobs">Loading...</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div> <!-- END GRID -->
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+    <!-- Home / entry -->
+    <section id="home" class="page">
+      <h2>Find Verified Workers • Register • Hire</h2>
+      <p>Choose how you'd like to proceed</p>
+
+<!-- Image Slideshow (3-at-a-time carousel) -->
+<div class="slideshow-container">
+
+  <div class="slide-track">
+    <img src="img/workers1.jpeg" alt="">
+    <img src="img/workers2.jpeg" alt="">
+    <img src="img/workers3.jpeg" alt="">
+    <img src="img/workers4.jpeg" alt="">
+    <img src="img/workers5.jpeg" alt="">
+    <img src="img/workers6.jpeg" alt="">
+    <img src="img/workers7.jpeg" alt="">
+    <img src="img/workers8.jpeg" alt="">
+    <img src="img/workers9.jpeg" alt="">
+    <img src="img/workers10.jpeg" alt="">
+    <img src="img/workers11.jpeg" alt="">
+
+    <!-- duplicate for seamless loop -->
+  <img src="img/workers1.jpeg" alt="">
+  <img src="img/workers2.jpeg" alt="">
+  <img src="img/workers3.jpeg" alt="">
+  <img src="img/workers4.jpeg" alt="">
+  <img src="img/workers5.jpeg" alt="">
+  <img src="img/workers6.jpeg" alt="">
+  <img src="img/workers7.jpeg" alt="">
+  <img src="img/workers8.jpeg" alt="">
+  <img src="img/workers9.jpeg" alt="">
+  <img src="img/workers10.jpeg" alt="">
+  <img src="img/workers11.jpeg" alt="">
+</div>
+
+
+  </div>
+
+</div>
+
+
+
+
+
+      <div class="entry-cards">
+        <article class="card">
+          <h3>Register as Skilled Man/Woman</h3>
+          <p>Artisans, technicians and craftsmen</p>
+          <p>For artisans, technicians, and craftsmen who want to showcase their skills and get hired by clients.</p>
+  
+        <!--  <button data-route="register-worker">Register as Skilled</button> -->
+        </article>
+
+        <article class="card">
+          <h3>Register as Labour Force (Graduate)</h3>
+          <p>Graduates, interns and technical staff</p>
+          <p>For graduates, interns, and technical staff who want to join the workforce and connect with opportunities.</p>
+ 
+         <!-- <button data-route="register-graduate">Register as Graduate</button> -->
+        </article>
+
+        <article class="card">
+          <h3>Request a Worker / Post a Job</h3>
+          <p>For companies, contractors and homeowners</p>
+          <p>For companies, contractors, and homeowners looking to hire verified workers efficiently and securely.</p>
+ 
+          <!-- <button data-route="request-job">Request Worker</button> -->
+        </article>
+      </div>
+    </section>
+
+    <!-- Registration: Skilled Worker -->
+    <section id="register-worker" class="page hidden">
+      <h2>Skilled Worker Registration</h2>
+
+  <div id="workerFormMessage" class="form-message" style="display:none;"></div>    
+  <form id="workerForm" enctype="multipart/form-data">
+        <fieldset>
+          <legend>Personal Info</legend>
+          <label>Full name<input type="text" name="full_name" required></label>
+          <label>Phone<input type="tel" name="phone" required></label>
+          <label>Email<input type="email" name="email" required></label>
+          <label>Gender
+            <select name="gender" required>
+              <option value="">Select</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Address<input type="text" name="address" required></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Trade & Experience</legend>
+          <label>Trade / Skill
+            <select name="trade" required>
+              <option value="">Select trade</option>
+              <option>Electrician</option>
+              <option>Plumber</option>
+              <option>Welder</option>
+              <option>Mason</option>
+              <option>Carpenter</option>
+              <option>Painter</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Years of experience<input type="number" min="0" name="experience" required></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Uploads</legend>
+          <label>ID (jpg, png, pdf)<input type="file" name="id_doc" accept=".jpg,.jpeg,.png,.pdf" required></label>
+          <label>Certificate (optional)<input type="file" name="certificate" accept=".pdf,.jpg,.jpeg,.png"></label>
+          <label>Passport Photo
+<input type="file" id="photoUpload" name="photo" accept="image/*" required></label>
+
+<div id="photoPreviewWrapper">
+  <img id="photoPreview" src="images/placeholder-passport.jpg" alt="Passport Preview">
+</div
+
+        </fieldset>
+
+   <fieldset>
+  <legend>Account</legend>
+
+  <div class="pw-wrapper">
+    <input type="password" id="password" name="password" placeholder="Password" required>
+    <button type="button" class="togglePw" data-target="password">👁️</button>
+  </div>
+
+  <div class="pw-wrapper">
+    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+    <button type="button" class="togglePw" data-target="confirm_password">👁️</button>
+  </div>
+</fieldset>
+
+
+        <div class="form-actions">
+          <button type="submit">Save & Submit</button>
+          <button type="button" id="btnTakeAssessment">Take Assessment</button>
+        </div>
+      </form>
+
+
+      <p class="back"><a href="#" data-route="home">← Back to home</a></p>
+    </section>
+
+    <!-- Placeholder: Graduate reg, Job request pages -->
+    <section id="register-graduate" class="page hidden">
+  <h2>Graduate Registration</h2>
+
+  <form id="graduateForm" method="post" action="php/register_graduate.php" enctype="multipart/form-data">
+
+    <!-- PERSONAL INFO -->
+    <fieldset>
+      <legend>Personal Info</legend>
+
+      <label>Full Name
+        <input type="text" name="full_name" required>
+      </label>
+
+      <label>Email
+        <input type="email" name="email" required>
+      </label>
+
+      <label>Phone
+        <input type="tel" name="phone" required>
+      </label>
+
+      <label>Gender
+        <select name="gender" required>
+          <option value="">Select</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </label>
+
+      <label>Address
+        <input type="text" name="address" required>
+      </label>
+    </fieldset>
+
+    <!-- EDUCATION -->
+    <fieldset>
+      <legend>Education</legend>
+
+      <label>Highest Qualification
+        <select name="qualification" required>
+          <option value="">Select</option>
+          <option>HND</option>
+          <option>BSc</option>
+          <option>BA</option>
+          <option>BEng</option>
+          <option>Masters</option>
+          <option>PhD</option>
+        </select>
+      </label>
+
+      <label>Course of Study
+        <input type="text" name="course" required>
+      </label>
+
+      <label>Institution
+        <input type="text" name="institution" required>
+      </label>
+
+      <label>Year of Graduation
+        <input type="number" min="1980" max="2030" name="graduation_year" required>
+      </label>
+
+      <label>NYSC Status
+        <select name="nysc_status" required>
+          <option value="">Select</option>
+          <option>Completed</option>
+          <option>In Progress</option>
+          <option>Exempted</option>
+        </select>
+      </label>
+
+      <label>NYSC Certificate (optional)
+        <input type="file" name="nysc_certificate" accept=".pdf,.jpg,.jpeg,.png">
+      </label>
+    </fieldset>
+
+    <!-- SKILLS -->
+    <fieldset>
+      <legend>Skills & Experience</legend>
+
+      <label>Area of Specialization
+        <input type="text" name="specialization" required>
+      </label>
+
+      <label>Years of Experience
+        <input type="number" min="0" name="experience">
+      </label>
+    </fieldset>
+
+    <!-- UPLOADS -->
+    <fieldset>
+      <legend>Uploads</legend>
+
+      <label>Upload CV (pdf only)
+        <input type="file" name="cv" accept=".pdf" required>
+      </label>
+
+      <label>Passport Photograph
+        <input type="file" name="photo" accept="image/*" required>
+      </label>
+    </fieldset>
+
+    <!-- ACCOUNT -->
+    <fieldset>
+      <legend>Account</legend>
+
+      <div class="pw-wrapper">
+        <input type="password" id="grad_password" name="password" placeholder="Password" required>
+        <button type="button" class="togglePw" data-target="grad_password">👁️</button>
+      </div>
+
+      <div class="pw-wrapper">
+        <input type="password" id="grad_confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+        <button type="button" class="togglePw" data-target="grad_confirm_password">👁️</button>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit">Submit Registration</button>
+    </div>
+  </form>
+
+  <p class="back"><a href="#" data-route="home">← Back to home</a></p>
+</section>
+
+
+<!-- Placeholder: Request a Job -->
+    <section id="request-job" class="page hidden">
+  <h2>Request a Worker / Post a Job</h2>
+
+  <form id="jobRequestForm" method="post" action="php/request_job.php" enctype="multipart/form-data">
+
+    <fieldset>
+      <legend>Client Info</legend>
+
+      <label>Full Name / Company Name
+        <input type="text" name="client_name" required>
+      </label>
+
+      <label>Email
+        <input type="email" name="email" required>
+      </label>
+
+      <label>Phone
+        <input type="tel" name="phone" required>
+      </label>
+
+      <label>Address
+        <input type="text" name="address" required>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Job Details</legend>
+
+      <label>Worker Type Needed
+        <select name="worker_type" required>
+          <option value="">Select</option>
+          <option>Skilled Worker</option>
+          <option>Artisan</option>
+          <option>Graduate Staff</option>
+          <option>Labourer</option>
+        </select>
+      </label>
+
+      <label>Job Title
+        <input type="text" name="job_title" required>
+      </label>
+
+      <label>Job Description
+        <textarea name="job_description" rows="4" required></textarea>
+      </label>
+
+      <label>Job Location
+        <input type="text" name="location" required>
+      </label>
+
+      <label>Duration
+        <select name="duration">
+          <option value="">Select</option>
+          <option>1 Day</option>
+          <option>1 Week</option>
+          <option>1 Month</option>
+          <option>3 Months</option>
+          <option>6 Months</option>
+          <option>Permanent</option>
+        </select>
+      </label>
+
+      <label>Estimated Pay Range
+        <input type="text" name="pay_range" placeholder="e.g. ₦30,000 / day or ₦120,000 monthly">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Optional Upload</legend>
+      <label>Supporting Document (pdf, jpg)
+        <input type="file" name="support_file" accept=".pdf,.jpg,.jpeg,.png">
+      </label>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit">Submit Job Request</button>
+    </div>
+  </form>
+
+  <p class="back"><a href="#" data-route="home">← Back to home</a></p>
+</section>
+
+
+<!-- Placeholder: other-service reg, Job request pages -->
+<section id="other-services" class="page hidden">
+  <h2>Other Services</h2>
+  <p>Select a service category below.</p>
+
+  <div class="service-grid">
+
+    <div class="service-card">
+      <h3>Real Estate</h3>
+      <p>Buy, sell, rent property or request an agent.</p>
+      <button data-route="real-estate">Explore →</button>
+    </div>
+
+    <div class="service-card">
+      <h3>Construction</h3>
+      <p>Get builders, supervisors, contractors or site workers.</p>
+      <button data-route="construction">Explore →</button>
+    </div>
+
+    <div class="service-card">
+      <h3>Business Development & Registration</h3>
+      <p>CAC, FIRS, PENCOM, NSITF, ITF, SCUML, TCC, BPP/DPP.</p>
+      <button data-route="biz-dev">Explore →</button>
+    </div>
+
+  </div>
+
+  <p class="back"><a href="#" data-route="home">← Back to home</a></p>
+</section>
+
+
+
+
+<section id="real-estate" class="page hidden">
+  <h2>Real Estate Services</h2>
+  <p class="form-desc>Please provide your details so our real estate consultants can reach out.</p>
+
+  <form id="realEstateForm" method="post" action="php/real_estate.php">
+
+    <!-- Property Needs -->
+    <fieldset>
+      <legend>Property Needs</legend>
+      <label>Service Type
+        <select name="request_type" required>
+          <option value="">Select</option>
+          <option>Buy Property</option>
+          <option>Rent Property</option>
+          <option>Shortlet / Airbnb</option>
+          <option>Sell Property</option>
+          <option>Land Acquisition</option>
+          <option>Property Management</option>
+        </select>
+      </label>
+
+      <label>Location Preference
+        <input type="text" name="location" placeholder="Example: Wuse, Gwarinpa, Lekki" required>
+      </label>
+
+      <label>Budget Range
+        <input type="text" name="budget" placeholder="e.g. ₦1.5M - ₦3M" required>
+      </label>
+    </fieldset>
+
+    <!-- Personal Info -->
+    <fieldset>
+      <legend>Your Information</legend>
+      <label>Full Name<input type="text" name="full_name" required></label>
+      <label>Phone Number<input type="tel" name="phone" required></label>
+      <label>Email Address<input type="email" name="email"></label>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit">Submit Request</button>
+    </div>
+
+  </form>
+
+  <p class="back"><a href="#" data-route="other-services">← Back</a></p>
+</section>
+
+<section id="construction" class="page hidden">
+  <h2>Construction & Building Services</h2>
+  <p class="form-desc>Fill out the details below for construction work, repairs, or full building projects.</p>
+
+  <form id="constructionForm" method="post" action="php/construction.php">
+
+    <!-- Project Details -->
+    <fieldset>
+      <legend>Project Details</legend>
+      <label>Type of Project
+        <select name="project_type" required>
+          <option value="">Select</option>
+          <option>New Building</option>
+          <option>Renovation</option>
+          <option>Finishing Work</option>
+          <option>Structural Repairs</option>
+          <option>Electrical Installation</option>
+          <option>Plumbing Installation</option>
+          <option>Land Survey</option>
+        </select>
+      </label>
+
+      <label>Project Location
+        <input type="text" name="location" placeholder="State / City / Area" required>
+      </label>
+
+      <label>Estimated Budget
+        <input type="text" name="budget" placeholder="e.g. ₦2M - ₦10M" required>
+      </label>
+
+      <label>Timeline
+        <select name="timeline" required>
+          <option>Immediately</option>
+          <option>Within 1 Month</option>
+          <option>Within 3 Months</option>
+          <option>Just Making Enquiries</option>
+        </select>
+      </label>
+    </fieldset>
+
+    <!-- Contact Info -->
+    <fieldset>
+      <legend>Your Information</legend>
+      <label>Full Name<input type="text" name="full_name" required></label>
+      <label>Phone Number<input type="tel" name="phone" required></label>
+      <label>Email Address<input type="email" name="email"></label>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit">Submit Request</button>
+    </div>
+
+  </form>
+
+  <p class="back"><a href="#" data-route="other-services">← Back</a></p>
+</section>
+
+<section id="biz-dev" class="page hidden">
+  <h2>Business Development & Corporate Services</h2>
+  <p class="form-desc>Select the service you need and provide your company or personal details.</p>
+
+  <form id="bizDevForm" method="post" action="php/biz_dev.php">
+
+    <!-- Service Selection -->
+    <fieldset>
+      <legend>Choose Service</legend>
+      <label>Corporate Service Required
+        <select name="service" required>
+          <option value="">Select</option>
+          <option>CAC Registration</option>
+          <option>Business Name Registration</option>
+          <option>Company Incorporation</option>
+          <option>Tax Registration (FIRS)</option>
+          <option>PENCOM Compliance</option>
+          <option>NSITF Registration</option>
+          <option>ITF Registration</option>
+          <option>SCUML Certificate</option>
+          <option>Business Plan Writing</option>
+          <option>Consultancy Request</option>
+        </select>
+      </label>
+
+      <label>Business / Company Name
+        <input type="text" name="company_name" placeholder="If new, write proposed name">
+      </label>
+
+      <label>Additional Notes
+        <textarea name="notes" placeholder="Explain your request briefly"></textarea>
+      </label>
+    </fieldset>
+
+    <!-- Contact Info -->
+    <fieldset>
+      <legend>Your Information</legend>
+      <label>Full Name<input type="text" name="full_name" required></label>
+      <label>Phone Number<input type="tel" name="phone" required></label>
+      <label>Email<input type="email" name="email"></label>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit">Submit Request</button>
+    </div>
+
+  </form>
+
+  <p class="back"><a href="#" data-route="other-services">← Back</a></p>
+</section>
+
+
+      <!-- Jobs Section -->
+      <section id="jobs-section" class="dashboard-section hidden">
+        <h3>Job Requests / Postings</h3>
+        <p>No job requests yet.</p>
+        <button id="postJobBtn">Post a Job</button>
+      </section>
+
+      <!-- Other Services Section -->
+      <section id="services-section" class="dashboard-section hidden">
+        <h3>Other Services</h3>
+        <ul>
+          <li><button id="realEstateBtn">Real Estate</button></li>
+          <li><button id="constructionBtn">Construction</button></li>
+          <li><button id="businessDevBtn">Business Development</button></li>
+        </ul>
+      </section>
+
+      <!-- Support Section -->
+      <section id="support-section" class="dashboard-section hidden">
+        <h3>Support</h3>
+        <p>Contact support or submit a request.</p>
+        <button id="contactSupportBtn">Contact Support</button>
+      </section>
+
+    </div> <!-- dashboard-main -->
+
+  </div> <!-- dashboard-container -->
+</section>
+
+
+
+
+
+  </main>
+
+<!-- LOGIN / SIGNUP PANEL -->
+<section class="login-signup-panel">
+  <div class="container">
+    <div class="panel-wrapper">
+      <!-- LOGIN -->
+      <div class="login-card">
+        <h3>Login</h3>
+
+       <div id="loginMessage" class="form-message" style="display:none;"></div>
+       <!-- <form id="loginForm" action="php/login.php" method="post"> -->
+
+
+
+<!-- ROLE TOGGLE -->
+       <div class="role-select-wrapper">
+    <label class="role-option">
+        <input type="radio" name="login_role" value="worker">
+        <span>Skilled Worker</span>
+    </label>
+
+    <label class="role-option">
+        <input type="radio" name="login_role" value="graduate">
+        <span>Graduate</span>
+    </label>
+</div>
+
+
+
+
+
+          <form id="loginForm">
+
+          <label for="login_email">Email</label>
+          <input type="email" id="login_email" name="email" required>
+          <label for="login_password">Password</label>
+          <input type="password" id="login_password" name="password" required>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <!-- SIGNUP -->
+      <div class="signup-card">
+        <h3>New Here?</h3>
+        <button data-route="register-worker">Register as Skilled Worker</button>
+        <button data-route="register-graduate">Register as Graduate</button>
+        <button data-route="request-job">Request Worker</button>
+      </div>
+
+      <!-- OTHER SERVICES -->
+      <div class="other-services-card">
+        <h3>Other Services</h3>
+        <button data-route="other-services">Explore</button>
+      </div>
+    </div>
+  </div>
+
+
+<!-- <div class="dashboard-preview"> -->
+ <!--   <button id="btnViewDashboard">View Dashboard (Preview)</button> -->
+ <!-- </div> -->
+ </section> 
+
+
+
+<section id="verification-pending" style="display:none;">
+  <div class="container" style="max-width:600px; margin:0 auto; padding:30px; font-family:Arial;">
+    <h2 style="text-align:center; margin-bottom:20px;">Verify Your Email</h2>
+    <p style="font-size:16px; line-height:1.6;">
+      Your registration was successful! 🎉  
+      A verification link has been sent to your email address.
+    </p>
+    <p style="font-size:16px; line-height:1.6;">
+      Please check your inbox (and spam folder) and click the verification link to activate your account.
+    </p>
+    <p style="margin-top:10px; font-size:15px;">
+      <strong>Note:</strong> The verification link is valid for <strong>24 hours</strong>.
+    </p>
+    <div style="margin-top:30px; text-align:center;">
+      <button id="goBackToRegister"
+              style="background:#007bff; color:#fff; padding:12px 20px; border:none;
+                     border-radius:6px; cursor:pointer; font-size:16px;">
+        Back to Registration
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© NaijaWorkMen.com</small>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
